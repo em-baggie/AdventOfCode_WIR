@@ -24,7 +24,7 @@ fn advent1a(mut list1: Vec<i32>, mut list2: Vec<i32>) -> i32 {
     list1.into_iter().zip(list2.into_iter()).map(|(a, b)| (a - b).abs()).sum()
 }
 
-// solution to part b (total similarity score)
+// solution to part 2 (total similarity score)
 fn advent1b(list1: Vec<i32>, list2: Vec<i32>) -> i32 {
     list1
     .into_iter()
@@ -38,7 +38,7 @@ fn main() {
     let list1 = lists.0;
     let list2 = lists.1;
 
-    // change this to advent1b for part b
+    // change this to advent1b for part 2
     let result = advent1a(list1, list2);
     println!("{}", result);
 }
