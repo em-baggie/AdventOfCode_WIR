@@ -18,8 +18,7 @@ use std::io::BufReader;
 use std::io::prelude::*;
 use std::fs::File;
 
-fn parse_input(file_name: &str) -> Result<(Vec<i32>, Vec<i32>), std::io::Error>
-{ 
+fn parse_input(file_name: &str) -> Result<(Vec<i32>, Vec<i32>), std::io::Error> { 
     let mut list1 = Vec::new();
     let mut list2 = Vec::new();
 
@@ -28,16 +27,20 @@ fn parse_input(file_name: &str) -> Result<(Vec<i32>, Vec<i32>), std::io::Error>
 
     for line in f.lines() {
         let line = line?;
-        let line_parts: Vec<&str> = line.split_whitespace().collect();
+        let mut line_parts = line.split_whitespace();
 
-        let first_num = line_parts[0].parse::<i32>().unwrap();
-        let second_num = line_parts[1].parse::<i32>().unwrap();
+        // use pattern matching instead of creating a new vec each time:
+        if let (Some(first_str), Some(second_str)) = (line_parts.next(), line_parts.next()) {
+            let first_num = first_str.parse::<i32>().unwrap(); 
+            let second_num = second_str.parse::<i32>().unwrap();
 
-        list1.push(first_num);
-        list2.push(second_num);
+            list1.push(first_num);
+            list2.push(second_num);
+        
+        }
     }
     Ok((list1, list2))
-}
+} 
 
 fn advent1(mut list1: Vec<i32>, mut list2: Vec<i32>) -> i32 {
     list1.sort();
