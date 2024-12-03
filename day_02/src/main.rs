@@ -70,5 +70,3 @@ fn main() {
     let total_safe_reports = safe_reports + fixed_reports.len();
     println!("{}", total_safe_reports);
 }
-
-
