@@ -1,5 +1,3 @@
-pub mod backwards;
-pub mod diagonal;
-pub mod horizontal;
-pub mod vertical;
+pub mod search_xmas;
 pub mod parser;
+pub mod errors;
