@@ -10,7 +10,7 @@ use crate::utils::errors::FindXmasError;
 ///
 /// * `Result<i32, FindXmasError>` - The number of times XMAS appears in the input, or an error
 
-pub fn find_xmas(input: &Vec<Vec<char>>) -> Result<usize, FindXmasError> {
+pub fn find_xmas_1(input: &Vec<Vec<char>>) -> Result<usize, FindXmasError> {
     let num_cols = input[0].len();
     let num_rows = input.len();
     let target:Vec<_> = "XMAS".chars().collect();
@@ -40,7 +40,12 @@ pub fn find_xmas(input: &Vec<Vec<char>>) -> Result<usize, FindXmasError> {
     Ok(count)
 }
 
-// tests for find_xmas
+/// TODO
+// pub fn find_xmas_2(input: &Vec<Vec<char>>) -> Result<usize, FindXmasError> {
+    
+// }
+
+// tests for find_xmas_1
 #[test]
 fn test_find_matches() {
     let input = vec![
@@ -56,7 +61,7 @@ fn test_find_matches() {
         vec!['M', 'X', 'M', 'X', 'A', 'X', 'M', 'A', 'S', 'X'],
     ];
 
-    assert_eq!(find_xmas(&input).unwrap(), 18);
+    assert_eq!(find_xmas_1(&input).unwrap(), 18);
 }
 
 #[test]
@@ -74,5 +79,32 @@ fn test_find_no_matches() {
         vec!['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'],
     ];
 
-    assert_eq!(find_xmas(&input).unwrap(), 0); 
+    assert_eq!(find_xmas_1(&input).unwrap(), 0); 
 }
+
+// The Elf looks quizzically at you. Did you misunderstand the assignment?
+
+// Looking for the instructions, you flip over the word search to find that this isn't actually an XMAS puzzle; it's an X-MAS puzzle in which you're supposed to find two MAS in the shape of an X. One way to achieve that is like this:
+
+// M.S
+// .A.
+// M.S
+
+// Irrelevant characters have again been replaced with . in the above diagram. Within the X, each MAS can be written forwards or backwards.
+
+// Here's the same example from before, but this time all of the X-MASes have been kept instead:
+
+// .M.S......
+// ..A..MSMS.
+// .M.S.MAA..
+// ..A.ASMSM.
+// .M.S.M....
+// ..........
+// S.S.S.S.S.
+// .A.A.A.A..
+// M.M.M.M.M.
+// ..........
+
+// In this example, an X-MAS appears 9 times.
+
+// Flip the word search from the instructions back over to the word search side and try again. How many times does an X-MAS appear?
