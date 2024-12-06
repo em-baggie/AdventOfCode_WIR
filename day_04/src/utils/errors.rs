@@ -2,7 +2,7 @@ use std::error::Error;
 use std::fmt;
 use std::io;
 
-/// Custom error types for the application
+/// Custom error types for the application - credit to @hollygrimm!!
 #[derive(Debug)]
 pub enum FindXmasError {
     /// Represents I/O operation failures
