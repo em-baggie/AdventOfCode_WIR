@@ -33,11 +33,18 @@ pub fn parse_rules(file_path: &str) -> Result<HashMap<i32, Vec<i32>>, CheckUpdat
 
 pub fn parse_updates(file_path: &str) -> Result<Vec<Vec<i32>>, CheckUpdatesError> {
     let file = fs::read_to_string(file_path)?;
-    let updates: Vec<Vec<i32>> = file.lines().map(|line| line.split(',').map(|num| num.parse().unwrap()).collect()).collect();
-    // if update is not odd length, return error
+    let updates = file.lines()
+        .map(|line| -> Result<Vec<i32>, CheckUpdatesError> {
+            line.split(',')
+                .map(|num| num.parse::<i32>()
+                    .map_err(|_| CheckUpdatesError::ParseUpdatesError(format!("Invalid update format for number: {}", num))))
+                .collect::<Result<Vec<i32>, _>>()
+        })
+        .collect::<Result<Vec<Vec<i32>>, _>>()?;
+
     for update in &updates {
         if update.len() % 2 == 0 {
-            return Err(CheckUpdatesError::CreateHashMapError("All updates are not odd in length".to_string()));
+            return Err(CheckUpdatesError::ParseUpdatesError("All updates are not odd in length".to_string()));
         }
     }
     Ok(updates)

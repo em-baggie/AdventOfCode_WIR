@@ -7,6 +7,7 @@ pub enum CheckUpdatesError {
     IoError(io::Error),
     CreateHashMapError(String),
     CheckUpdateError(String),
+    ParseUpdatesError(String),
 }
 
 impl From<io::Error> for CheckUpdatesError {
@@ -23,6 +24,7 @@ impl fmt::Display for CheckUpdatesError {
             Self::IoError(e) => write!(f, "IO error: {}", e),
             Self::CreateHashMapError(msg) => write!(f, "Unable to parse to hashmap: {}", msg),
             Self::CheckUpdateError(msg) => write!(f, "Unable check update: {}", msg),
+            Self::ParseUpdatesError(msg) => write!(f, "Unable to parse updates: {}", msg),
         }
     }
 }
