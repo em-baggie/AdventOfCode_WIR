@@ -40,10 +40,48 @@ pub fn find_xmas_1(input: &Vec<Vec<char>>) -> Result<usize, FindXmasError> {
     Ok(count)
 }
 
-/// TODO
-// pub fn find_xmas_2(input: &Vec<Vec<char>>) -> Result<usize, FindXmasError> {
-    
-// }
+pub fn find_xmas_2(input: &Vec<Vec<char>>) -> Result<usize, FindXmasError> {
+    let num_cols = input[0].len();
+    let num_rows = input.len();
+    let target:Vec<_> = "MAS".chars().collect();
+    let dirs: Vec<(isize, isize)> = vec![(1, 1), (1, -1), (-1, -1), (-1, 1)];
+    let mut count = 0;
+
+    for r in 0..num_rows {
+        for c in 0..num_cols {
+            for dir in &dirs {
+                let mut pos = (r as isize, c as isize);
+                let mut matched_letters = 0;
+                for i in 0..target.len() {
+                    if pos.0 >= 0 && pos.0 < num_rows as isize && pos.1 >= 0 && pos.1 < num_cols as isize {
+                        if input[pos.0 as usize][pos.1 as usize] == target[i] {
+                            matched_letters += 1;
+                        }
+                    }
+                    pos.0 += dir.0;
+                    pos.1 += dir.1;
+                }
+                if matched_letters == 3 {
+                    let coords_to_check: ((isize, isize), (isize, isize)) = match dir {
+                        (-1, -1) => ((r as isize, c as isize + 2), (r as isize + 2, c as isize)),
+                        (-1, 1) => ((r as isize, c as isize - 2), (r as isize + 2, c as isize)),
+                        (1, -1) => ((r as isize - 2, c as isize), (r as isize, c as isize + 2)),
+                        (1, 1) => ((r as isize - 2, c as isize), (r as isize, c as isize - 2)),
+                        _ => return Err(FindXmasError::InvalidDirection("Direction not found".to_string())),
+                    };
+                    if coords_to_check.0.0 >= 0 && coords_to_check.0.0 < num_rows as isize && coords_to_check.0.1 >= 0 && coords_to_check.0.1 < num_cols as isize &&
+                        coords_to_check.1.0 >= 0 && coords_to_check.1.0 < num_rows as isize && coords_to_check.1.1 >= 0 && coords_to_check.1.1 < num_cols as isize {
+                        if (input[coords_to_check.0.0 as usize][coords_to_check.0.1 as usize] == 'M' && input[coords_to_check.1.0 as usize][coords_to_check.1.1 as usize] == 'A') ||
+                            (input[coords_to_check.0.0 as usize][coords_to_check.0.1 as usize] == 'A' && input[coords_to_check.1.0 as usize][coords_to_check.1.1 as usize] == 'M') {
+                            count +=1;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    Ok(count)
+}
 
 // tests for find_xmas_1
 #[test]

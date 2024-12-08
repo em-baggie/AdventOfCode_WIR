@@ -23,7 +23,7 @@ pub fn parse_input_to_vec(file_path: &str) -> Result<Vec<Vec<char>>, FindXmasErr
 
     let row_length = output.get(0).map_or(0, |row| row.len());
     if !output.iter().all(|row| row.len() == row_length) {
-        return Err(FindXmasError::from_shape_error("Uneven row and columns lengths".to_string()));
+        return Err(FindXmasError::VecCreationError("Uneven row and columns lengths".to_string()));
     }
     Ok(output)
 }

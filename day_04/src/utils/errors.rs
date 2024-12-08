@@ -9,17 +9,13 @@ pub enum FindXmasError {
     IoError(io::Error),
     /// Represents failure to create Vec<Vec<char>> from input data with rows and columnds of equal lengths
     VecCreationError(String),
+    /// Represents invalid direction
+    InvalidDirection(String),
 }
 
 impl From<io::Error> for FindXmasError {
     fn from(error: io::Error) -> Self {
         Self::IoError(error)
-    }
-}
-
-impl FindXmasError {
-    pub fn from_shape_error(message: String) -> Self {
-        Self::VecCreationError(message)
     }
 }
 
@@ -30,6 +26,7 @@ impl fmt::Display for FindXmasError {
         match self {
             Self::IoError(e) => write!(f, "IO error: {}", e),
             Self::VecCreationError(msg) => write!(f, "Failed to create Vec<Vec<char>>: {}", msg),
+            Self::InvalidDirection(msg) => write!(f, "Invalid direction: {}", msg),
         }
     }
 }
