@@ -2,6 +2,15 @@ use std::error::Error;
 use std::fmt;
 use std::io;
 
+/// Guard Gallivant Error
+/// 
+/// Custom error handling for the Guard Gallivant program.
+/// 
+/// variants:
+/// - IoError: An error from the io library
+/// - ParseError: An error from the parser
+/// - FindPositionsError: An error from the find positions function
+
 #[derive(Debug)]
 pub enum GuardGallivantError {
     IoError(io::Error),

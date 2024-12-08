@@ -1,3 +1,16 @@
+/// Direction enum
+/// 
+/// # Variants
+/// 
+/// * `Up` - Up direction
+/// * `Down` - Down direction
+/// * `Left` - Left direction
+/// * `Right` - Right direction
+/// 
+/// # Methods
+/// * `coordinate_offset` - Returns the coordinate offset for the direction
+/// * `change_direction` - Returns the next direction (90 degree turn clockwise)
+
 #[derive(Debug, Clone, Copy)]
 pub enum Direction {
     Up,
@@ -9,10 +22,10 @@ pub enum Direction {
 impl Direction {
     pub fn coordinate_offset(&self) -> (isize, isize) {
         match self {
-            Direction::Up => (1, 0),
-            Direction::Down => (-1, 0),
-            Direction::Left => (0, -1),
-            Direction::Right => (0, 1),
+            Direction::Up => (0, -1),
+            Direction::Down => (0, 1),
+            Direction::Left => (-1, 0),
+            Direction::Right => (1, 0),
         }
     }
 

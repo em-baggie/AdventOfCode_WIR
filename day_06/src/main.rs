@@ -92,7 +92,7 @@ use utils::{parser, find_positions};
 use utils::errors::GuardGallivantError;
 
 fn main() -> Result<(), GuardGallivantError> {
-    let input = parser::parse_input_to_vec("src/input/testinput.txt")?;
+    let input = parser::parse_input_to_vec("src/input/input.txt")?;
     let num_positions = find_positions::find_num_positions(input)?;
     println!("Number of positions: {}", num_positions);
     Ok(())
