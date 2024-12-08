@@ -7,7 +7,7 @@ pub enum Direction {
 }
 
 impl Direction {
-    fn new(&self) -> (isize, isize) {
+    pub fn coordinate_offset(&self) -> (isize, isize) {
         match self {
             Direction::Up => (1, 0),
             Direction::Down => (-1, 0),
@@ -16,7 +16,7 @@ impl Direction {
         }
     }
 
-    fn change_direction(&self) -> Direction {
+    pub fn change_direction(&self) -> Direction {
         match self {
             Direction::Up => Direction::Right,
             Direction::Down => Direction::Left,
