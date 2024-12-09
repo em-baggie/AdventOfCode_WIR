@@ -44,7 +44,7 @@ pub fn find_xmas_2(input: &Vec<Vec<char>>) -> Result<usize, FindXmasError> {
     let num_cols = input[0].len();
     let num_rows = input.len();
     let target:Vec<_> = "MAS".chars().collect();
-    let dirs: Vec<(isize, isize)> = vec![(1, 1), (1, -1), (-1, -1), (-1, 1)];
+    let dirs: Vec<(isize, isize)> = vec![(1, 1), (1, 0), (1, -1), (0, -1), (-1, -1), (-1, 0), (-1, 1), (0, 1)];
     let mut count = 0;
 
     for r in 0..num_rows {
@@ -63,10 +63,14 @@ pub fn find_xmas_2(input: &Vec<Vec<char>>) -> Result<usize, FindXmasError> {
                 }
                 if matched_letters == 3 {
                     let coords_to_check: ((isize, isize), (isize, isize)) = match dir {
-                        (-1, -1) => ((r as isize, c as isize + 2), (r as isize + 2, c as isize)),
-                        (-1, 1) => ((r as isize, c as isize - 2), (r as isize + 2, c as isize)),
-                        (1, -1) => ((r as isize - 2, c as isize), (r as isize, c as isize + 2)),
-                        (1, 1) => ((r as isize - 2, c as isize), (r as isize, c as isize - 2)),
+                        (-1, -1) => ((r as isize, c as isize + 1), (r as isize + 1, c as isize)),
+                        (-1, 1) => ((r as isize, c as isize - 1), (r as isize + 1, c as isize)),
+                        (1, -1) => ((r as isize - 1, c as isize), (r as isize, c as isize + 1)),
+                        (1, 1) => ((r as isize - 1, c as isize), (r as isize, c as isize - 1)),
+                        (0, -1) => ((r as isize - 1, c as isize + 1), (r as isize + 1, c as isize + 1)),
+                        (0, 1) => ((r as isize - 1, c as isize - 1), (r as isize + 1, c as isize - 1)),
+                        (1, 0) => ((r as isize - 1, c as isize - 1), (r as isize - 1, c as isize + 1)),
+                        (-1, 0) => ((r as isize + 1, c as isize - 1), (r as isize + 1, c as isize + 1)),
                         _ => return Err(FindXmasError::InvalidDirection("Direction not found".to_string())),
                     };
                     if coords_to_check.0.0 >= 0 && coords_to_check.0.0 < num_rows as isize && coords_to_check.0.1 >= 0 && coords_to_check.0.1 < num_cols as isize &&

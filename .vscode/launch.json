@@ -1,14 +1,15 @@
 {
     "version": "0.2.0",
     "configurations": [
+        
         {
-            "name": "Debug Day 02",
+            "name": "Debug Day 06",
             "type": "lldb",
             "request": "launch",
-            "program": "${workspaceFolder}/day_02/target/debug/day_02", // Adjust the path to the executable
+            "program": "${workspaceFolder}/day_06/target/debug/day_06", // Adjust the path to the executable
             "args": [],
-            "cwd": "${workspaceFolder}/day_02", // Set the working directory to day_02
-            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/day_06", // Set the working directory to day_02
+            // "stopAtEntry": true, 
             "env": {},
             "preLaunchTask": "cargo build", // Ensure this matches the label in tasks.json
             "internalConsoleOptions": "openOnSessionStart"
