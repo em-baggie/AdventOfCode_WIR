@@ -29,4 +29,12 @@
 
 fn main() {
     println!("Welcome to Day 7!");
+    // parse input into result number and vec of input numbers - use regex (lazy)
+    // find all possible combinations of input numbers
+    // find all possible combinations of operators (add or multiply)
+    // evaluate all possible combinations of input numbers and operators
+    // check if the result is equal to the result number
+    // if it is, add the result number to the total calibration result
+    // print the total calibration result
+
 }

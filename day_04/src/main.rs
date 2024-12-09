@@ -11,7 +11,7 @@ fn main() {
     println!("Number of XMAS matches: {}", matches);
 
     // find x-mas matches in input part 2
-    let matches = search::find_xmas_2(&input_vec).expect("error finding xmas");
-    println!("Number of XMAS matches: {}", matches);
+    // let matches = search::find_xmas_2(&input_vec).expect("error finding xmas");
+    // println!("Number of XMAS matches: {}", matches);
 
 }
