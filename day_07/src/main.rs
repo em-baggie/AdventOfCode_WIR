@@ -25,16 +25,17 @@
 // The engineers just need the total calibration result, which is the sum of the test values from just the equations that could possibly be true. In the above example, the sum of the test values for the three equations listed above is 3749.
 
 // Determine which equations could possibly be true. What is their total calibration result?
+mod utils;
 
+use utils::regex;
 
 fn main() {
-    println!("Welcome to Day 7!");
-    // parse input into result number and vec of input numbers - use regex (lazy)
+    let input = parse_input("src/input/input.txt")
+    // parse input into result number and vec of input numbers
     // find all possible combinations of input numbers
     // find all possible combinations of operators (add or multiply)
     // evaluate all possible combinations of input numbers and operators
     // check if the result is equal to the result number
     // if it is, add the result number to the total calibration result
     // print the total calibration result
-
 }
