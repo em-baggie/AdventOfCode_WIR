@@ -27,10 +27,11 @@
 // Determine which equations could possibly be true. What is their total calibration result?
 mod utils;
 
-use utils::regex;
+use utils::{parser};
 
 fn main() {
-    let input = parse_input("src/input/input.txt")
+    let input = parser::parse_input("src/input/input_test.txt");
+    println!("{:?}", input)
     // parse input into result number and vec of input numbers
     // find all possible combinations of input numbers
     // find all possible combinations of operators (add or multiply)
