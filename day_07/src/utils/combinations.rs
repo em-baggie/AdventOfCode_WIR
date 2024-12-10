@@ -2,19 +2,14 @@ use itertools::Itertools;
 use crate::utils::errors::BridgeRepairError;
 use std::iter::repeat;
 
-pub fn combinations(key: isize, values: Vec<isize>) -> Result<Vec<Vec<String>>, BridgeRepairError> {
-    let num_combinations = values.len() - 1;
+pub fn find_combinations(num_values: usize) -> Result<Vec<Vec<String>>, BridgeRepairError> {
+    let num_combinations: usize = num_values - 1;
     let operators = vec!["*", "+"];
     let combinations = repeat(operators)
-        .take(num_combinations)
+        .take(num_combinations as usize)
         .multi_cartesian_product()
         .map(|v| v.into_iter().map(|s| s.to_string()).collect())
         .collect();
 
-    return Ok(combinations);
-    // need to find all of the possible combinations of + and * which does not have to include both of them
-
+    Ok(combinations)
 }
-
-// 1 --> * or +
-// 2 --> * * or + + or + * or * +

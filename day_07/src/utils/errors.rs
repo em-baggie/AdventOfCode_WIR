@@ -8,6 +8,7 @@ pub enum BridgeRepairError {
     IoError(io::Error),
     RegexError(regex::Error),
     ParseError(ParseIntError),
+    CheckCalibrationError(&'static str)
 }
 
 impl From<io::Error> for BridgeRepairError {
@@ -36,6 +37,7 @@ impl fmt::Display for BridgeRepairError {
             Self::IoError(e) => write!(f, "IO error: {}", e),
             Self::RegexError(e) => write!(f, "Regex error: {}", e),
             Self::ParseError(e) => write!(f, "Error parsing input: {}", e),
+            Self::CheckCalibrationError(e) => write!(f, "Error checking calibration: {}", e),
         }
     }
 }
