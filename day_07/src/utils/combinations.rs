@@ -6,7 +6,7 @@ pub fn find_combinations(num_values: usize) -> Result<Vec<Vec<String>>, BridgeRe
     let num_combinations: usize = num_values - 1;
     let operators = vec!["*", "+"];
     let combinations = repeat(operators)
-        .take(num_combinations as usize)
+        .take(num_combinations)
         .multi_cartesian_product()
         .map(|v| v.into_iter().map(|s| s.to_string()).collect())
         .collect();

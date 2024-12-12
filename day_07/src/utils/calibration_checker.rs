@@ -1,19 +1,19 @@
-use std::collections::HashMap;
 use crate::utils::combinations;
 use crate::utils::errors::BridgeRepairError;
 
-pub fn check_calibration(map: HashMap<i64, Vec<i64>>) -> Result<i64, BridgeRepairError> {
+pub fn check_calibration(map: Vec<(i64, Vec<i64>)>) -> Result<i64, BridgeRepairError> {
     let mut total: i64 = 0;
 
     // iterate over each key, value pair in the map
     for (key, value) in map.into_iter() {
-        // Ensure all values in the vector are i64
-        let value: Vec<i64> = value.into_iter().map(|v| v as i64).collect();
         // find all possible combinations of operators for the value
-        let operator_combinations = combinations::find_combinations(value.len())?;
+        let operator_combinations: Vec<Vec<String>> = combinations::find_combinations(value.len())?;
 
         // iterate over each combination of operators
         for combination in operator_combinations {
+            // if key == 894 {
+            //     println!("Combination: {:?}", combination);
+            // }
             let mut sum: i64 = value[0];
             // evaluate the total for each combination of operators
             for (index, operator) in combination.into_iter().enumerate() {
@@ -24,13 +24,34 @@ pub fn check_calibration(map: HashMap<i64, Vec<i64>>) -> Result<i64, BridgeRepai
                 };
             }
             
+            // if key == 894 {
+            //     println!("Key: {}, Sum: {}", key, sum);
+            // }
+
             // if the sum matches the key, add the key to the total and break
             if sum == key {
-                println!("{:?}", key);
                 total += key;
+                println!("{}", key);
                 break; // Move onto the next key, value pair
             }
+
+
         }
     }
     Ok(total)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::utils::parser;
+    use crate::utils::errors::BridgeRepairError;
+
+    #[test]
+    fn test_check_calibration() -> Result<(), BridgeRepairError> {
+        let input = parser::parse_input("src/input/input_test.txt")?;
+        let result = check_calibration(input)?;
+        assert_eq!(result, 3749);
+        Ok(())
+    }
 }
