@@ -1,7 +1,6 @@
 use std::error::Error;
 use std::fmt;
 use std::io;
-use std::num::ParseIntError;
 
 #[derive(Debug)]
 pub enum AntiNodeError {

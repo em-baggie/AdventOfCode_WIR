@@ -16,8 +16,8 @@ pub fn antinode(map: HashMap<char, Vec<(usize, usize)>>, dimensions: (i32, i32))
                     coords[j].0 as i32 - coords[i].0 as i32,
                     coords[j].1 as i32 - coords[i].1 as i32,
                 );
-                let new_coord1: (i32, i32) = (coords[i].0 as i32 + diff.0, coords[i].1 as i32 + diff.1);
-                let new_coord2: (i32, i32) = (coords[j].0 as i32 - diff.0, coords[j].1 as i32 - diff.1);
+                let new_coord1: (i32, i32) = (coords[i].0 as i32 - diff.0, coords[i].1 as i32 - diff.1);
+                let new_coord2: (i32, i32) = (coords[j].0 as i32 + diff.0, coords[j].1 as i32 + diff.1);
 
 
                 if is_within_bounds(new_coord1, dimensions) {
@@ -32,4 +32,18 @@ pub fn antinode(map: HashMap<char, Vec<(usize, usize)>>, dimensions: (i32, i32))
         }
     }
     Ok(unique_antinodes.len())
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::utils::{parser, antinode_checker};
+    #[test]
+    fn test_antinode() -> Result<(), AntiNodeError>  {
+        let input = parser::parse_input("src/input/input_test.txt")?;
+        let dimensions = parser::find_grid_dimensions("src/input/input_test.txt")?;
+        let antinodes = antinode_checker::antinode(input, dimensions)?;
+        assert_eq!(antinodes, 14);
+        Ok(())
+    }
 }

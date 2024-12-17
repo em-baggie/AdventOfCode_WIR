@@ -4,7 +4,6 @@ use std::fs;
 
 
 pub fn parse_input(file_path: &str) -> Result<HashMap<char, Vec<(usize, usize)>>, AntiNodeError> {
-    // define input and regex
     let input = fs::read_to_string(file_path)?;
     let mut result = HashMap::<char, Vec<(usize, usize)>>::new();
 
