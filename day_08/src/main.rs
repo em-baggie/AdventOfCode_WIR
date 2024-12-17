@@ -76,10 +76,15 @@
 // Calculate the impact of the signal. How many unique locations within the bounds of the map contain an antinode?
 mod utils;
 use utils:: {errors, parser, antinode_checker};
+use crate::utils::errors::AntiNodeError;
 
-fn main() {
-    let input = parser::parse_input("src/input/input.txt");
-    let grid_dimensions = parser::find_grid_dimensions("src/input/input.txt");
+fn main() -> Result<(), AntiNodeError> {
+    let input = parser::parse_input("src/input/input.txt")?;
+    let grid_dimensions = parser::find_grid_dimensions("src/input/input.txt")?;
     println!("{:?}", input);
     println!("{:?}", grid_dimensions);
+    let antinodes = antinode_checker::antinode(input, grid_dimensions)?;
+    println!("{:?}", antinodes);
+    Ok(())
+
 }
